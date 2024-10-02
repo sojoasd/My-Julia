@@ -81,6 +81,6 @@ jobs:
           julia --project generateDylib.jl $PACKAGE_NAME $PACKAGE_VERSION ${{ secrets.REPO_TOKEN }}
           ls
           echo "run test"
-          julia --project -e 'using Pkg; @time Pkg.test("FindRoot")'
+          julia --project testDylib.jl $PACKAGE_NAME
           echo "run test with dylib"
-          julia --project --sysimage $PACKAGE_NAME.dylib -e 'using Pkg; @time Pkg.test("FindRoot")'
+          julia --project --sysimage $PACKAGE_NAME.dylib testDylib.jl $PACKAGE_NAME
