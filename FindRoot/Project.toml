@@ -1,7 +1,7 @@
 name = "FindRoot"
 uuid = "52655ab5-b29d-45fc-a133-0c293715c2a1"
 authors = ["zeal yen <sojoasd@gmail.com>"]
-version = "0.1.014"
+version = "0.1.1"
 
 [deps]
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
