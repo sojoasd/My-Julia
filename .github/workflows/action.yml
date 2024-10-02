@@ -56,7 +56,12 @@ jobs:
           git config --local user.name "zeal yen"
           git add .
           git commit -m "Update version to $PACKAGE_VERSION"
-          echo "${{ secrets.REPO_TOKEN }}"
+          echo "REPO_TOKEN is ${{ secrets.REPO_TOKEN }}"
+          if [ -z "${{ secrets.REPO_TOKEN }}" ]; then
+            echo "REPO_TOKEN is empty"
+          else
+            echo "REPO_TOKEN is set with length: ${#REPO_TOKEN}"
+          fi
           git push https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/sojoasd/My-Julia.git HEAD:main
       - name: Run pkg registry script
         run: |
