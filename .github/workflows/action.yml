@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "Running tests for $PACKAGE_NAME version $PACKAGE_VERSION"
           echo "julia --project testPkg.jl $PACKAGE_NAME"
-          julia --project testPkg.jl $PACKAGE_NAME
+          # julia --project testPkg.jl $PACKAGE_NAME
 
   pkg-registry:
     needs: pkg-test
@@ -80,4 +80,7 @@ jobs:
           echo "Registering $PACKAGE_NAME version $PACKAGE_VERSION"
           julia --project generateDylib.jl $PACKAGE_NAME $PACKAGE_VERSION ${{ secrets.REPO_TOKEN }}
           ls
-          julia --project --sysimage $PACKAGE_NAME.dylib
+          echo "run test"
+          julia --project -e 'using Pkg; @time Pkg.test("FindRoot")'
+          echo "run test with dylib"
+          julia --project --sysimage $PACKAGE_NAME.dylib -e 'using Pkg; @time Pkg.test("FindRoot")'
