@@ -1,7 +1,7 @@
 pkgName = ARGS[1]
-repoToken = ARGS[2]
+# repoToken = ARGS[2]
 registryRepoUrl = "git@github.com:sojoasd/My-Julia.git"
-registryPublicRepoUrl = "https://$repoToken@github.com/sojoasd/My-Julia.git"
+registryPublicRepoUrl = "https://github.com/sojoasd/My-Julia.git"
 
 pkgDir = "$(@__DIR__)/$pkgName"
 println("$pkgDir")
@@ -22,7 +22,7 @@ if !isfile("Registry.toml")
     println("Registry.toml created")
 end
 
-LocalRegistry.register(pkgDir; registry = registryPublicRepoUrl, repo = registryPublicRepoUrl)
+LocalRegistry.register(pkgDir; registry = registryRepoUrl, repo = registryRepoUrl)
 println("Package registered")
 
 
