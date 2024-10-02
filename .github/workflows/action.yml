@@ -21,9 +21,14 @@ jobs:
       PACKAGE_VERSION: ${{ github.event.inputs.package_version }}
     steps:
       - uses: actions/checkout@v4
-      - name: Run a multi-line script
+      - name: Set up Julia 1.10
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: 1.10
+      - name: Run test script
         run: |
           echo "Running tests for $PACKAGE_NAME version $PACKAGE_VERSION"
+          julia --project testPkg.jl $PACKAGE_NAME
 
   pkg-registry:
     needs: pkg-test

@@ -9,7 +9,6 @@ println("$registryPublicRepoUrl")
 
 using Pkg
 
-using Pkg
 Pkg.activate(@__DIR__)
 Pkg.instantiate()
 

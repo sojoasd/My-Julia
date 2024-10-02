@@ -24,7 +24,10 @@ function plotPolynomials(plot_data)
     for (x_vals, y_vals, polynomial) in plot_data
         plot!(x_vals, y_vals, label="f(x) = $(polynomial)", xlabel="x", ylabel="f(x)", title="Polynomial Plot", legend=:topright)
     end
-    savefig("polynomial_plot.png")  # 將圖形保存為 PNG 文件
+
+    save_path = joinpath(dirname(dirname(@__DIR__)), "polynomial_plot.png")
+    println("Saving plot to $save_path")
+    savefig(save_path)  # 將圖形保存為 PNG 文件
 end
 
 # 執行多個測試

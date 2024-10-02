@@ -220,7 +220,7 @@ uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[deps.FindRoot]]
 deps = ["Plots", "Roots"]
-git-tree-sha1 = "6ce05d6d706761393aa3ebb1119152f58e4b059e"
+path = "/Users/zealyen/WorkSpace/My-Julia/FindRoot"
 uuid = "52655ab5-b29d-45fc-a133-0c293715c2a1"
 version = "0.1.0"
 
