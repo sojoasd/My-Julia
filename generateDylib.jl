@@ -37,6 +37,7 @@ pkg"st"
 # create dylib
 println("creating dylib at $(@__DIR__)/$pkgName.dylib")
 
+println("test uncompiled")
 PackageCompiler.create_sysimage([symbol]; 
     sysimage_path="$(@__DIR__)/$pkgName.dylib", 
     include_transitive_dependencies=false, 

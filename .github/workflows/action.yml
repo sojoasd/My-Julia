@@ -80,7 +80,7 @@ jobs:
           echo "Registering $PACKAGE_NAME version $PACKAGE_VERSION"
           julia --project generateDylib.jl $PACKAGE_NAME $PACKAGE_VERSION ${{ secrets.REPO_TOKEN }}
           ls
-          echo "run test"
+          echo "test JIT compile"
           julia --project testDylib.jl $PACKAGE_NAME
-          echo "run test with dylib"
+          echo "test AOT compile"
           julia --project --sysimage $PACKAGE_NAME.dylib testDylib.jl $PACKAGE_NAME
