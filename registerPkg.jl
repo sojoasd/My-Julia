@@ -1,7 +1,7 @@
 pkgName = ARGS[1]
-# repoToken = ARGS[2]
+repoToken = ARGS[2]
 registryRepoUrl = "git@github.com:sojoasd/My-Julia.git"
-registryPublicRepoUrl = "https://github.com/sojoasd/My-Julia.git"
+registryPublicRepoUrl = "https://x-access-token:$repoToken@github.com/sojoasd/My-Julia.git"
 
 pkgDir = "$(@__DIR__)/$pkgName"
 println("$pkgDir")
@@ -24,6 +24,3 @@ end
 
 LocalRegistry.register(pkgDir; registry = registryPublicRepoUrl, repo = registryPublicRepoUrl)
 println("Package registered")
-
-
-
