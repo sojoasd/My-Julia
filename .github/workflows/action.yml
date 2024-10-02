@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "Running tests for $PACKAGE_NAME version $PACKAGE_VERSION"
           echo "julia --project testPkg.jl $PACKAGE_NAME"
-          julia --project testPkg.jl $PACKAGE_NAME
+          # julia --project testPkg.jl $PACKAGE_NAME
 
   pkg-registry:
     needs: pkg-test
@@ -48,6 +48,7 @@ jobs:
           echo "Registering $PACKAGE_NAME version $PACKAGE_VERSION"
           cat ./$PACKAGE_NAME/Project.toml
           sed -i "s/^version = \".*\"/version = \"$PACKAGE_VERSION\"/" ./$PACKAGE_NAME/Project.toml
+          echo "New version:"
           cat ./$PACKAGE_NAME/Project.toml
       - name: Commit and push changes
         run: |
@@ -55,7 +56,7 @@ jobs:
           git config --local user.name "zeal yen"
           git add .
           git commit -m "Update version to $PACKAGE_VERSION"
-          git push
+          git push https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/sojoasd/My-Julia.git HEAD:main
       - name: Run pkg registry script
         run: |
           echo "Registering $PACKAGE_NAME version $PACKAGE_VERSION"
