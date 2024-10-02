@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -7,7 +7,7 @@ on:
       package_name:
         description: 'The name of the package'
         required: true
-        default: 'MyPackage'
+        default: 'FindRoot'
       package_version:
         description: 'The version of the package'
         required: true
@@ -39,6 +39,24 @@ jobs:
       PACKAGE_VERSION: ${{ github.event.inputs.package_version }}
     steps:
       - uses: actions/checkout@v4
-      - name: Run a multi-line script
+      - name: Set up Julia 1.10
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.10.0'
+      - name: Modify Project.toml version
+        run: |
+          cat Project.toml
+          sed -i "s/^version = \".*\"/version = \"$PACKAGE_VERSION\"/" ./$PACKAGE_NAME/Project.toml
+          cat Project.toml
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "zealyen@noodoe.com"
+          git config --local user.name "zeal yen"
+          git add Project.toml
+          git commit -m "Update version to $PACKAGE_VERSION"
+          git push
+      - name: Run pkg registry script
         run: |
           echo "Registering $PACKAGE_NAME version $PACKAGE_VERSION"
+          echo "julia --project registerPkg.jl $PACKAGE_NAME"
+          julia --project registerPkg.jl $PACKAGE_NAME
