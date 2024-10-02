@@ -1,7 +1,5 @@
 module MatrixOperator
 
-using LinearAlgebra
-using DifferentialEquations
 using Random
 
 greet() = print("Hello MatrixOperator")
@@ -20,12 +18,6 @@ function matrix_operations(cs::ComplexStruct)
         A .= A .+ randn(size(A))  # 增加隨機噪音
     end
     return sum(A)
-end
-
-# 定義一個微分方程
-function odefunc!(du, u, p, t)
-    du[1] = u[2]
-    du[2] = -p[1] * u[1]
 end
 
 export greet, ComplexStruct, matrix_operations
