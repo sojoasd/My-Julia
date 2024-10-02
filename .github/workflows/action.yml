@@ -56,8 +56,7 @@ jobs:
           git config --local user.name "zeal yen"
           git add .
           git commit -m "Update version to $PACKAGE_VERSION"
-          git remote set-url origin https://${{ secrets.REPO_TOKEN }}@github.com/sojoasd/My-Julia.git
-          git push origin HEAD:main
+          git push
       - name: Run pkg registry script
         run: |
           echo "Registering $PACKAGE_NAME version $PACKAGE_VERSION"
