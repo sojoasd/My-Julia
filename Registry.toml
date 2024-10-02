@@ -3,4 +3,5 @@ uuid = "b64c7fe9-341b-4271-a202-736b797b1cef"
 repo = "git@github.com:sojoasd/My-Julia.git"
 
 [packages]
+404f77b7-1439-402a-be9e-06dbfcf8e37d = { name = "MatrixOperator", path = "M/MatrixOperator" }
 52655ab5-b29d-45fc-a133-0c293715c2a1 = { name = "FindRoot", path = "F/FindRoot" }
