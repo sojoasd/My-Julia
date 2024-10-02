@@ -4,7 +4,6 @@ registryRepoUrl = "git@github.com:sojoasd/My-Julia.git"
 pkgDir = "$(@__DIR__)/$pkgName"
 println("$pkgDir")
 println("$registryRepoUrl")
-println("$registryPublicRepoUrl")
 
 using Pkg
 
