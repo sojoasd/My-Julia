@@ -1,11 +1,13 @@
 pkgName = ARGS[1]
 repoToken = ARGS[2]
 registryRepoUrl = "git@github.com:sojoasd/My-Julia.git"
-registryPublicRepoUrl = "https://x-access-token:$repoToken@github.com/sojoasd/My-Julia.git"
+registryPrivateRepoUrl = "https://x-access-token:$repoToken@github.com/sojoasd/My-Julia.git"
+registryPublicRepoUrl = "https://github.com/sojoasd/My-Julia.git"
 
 pkgDir = "$(@__DIR__)/$pkgName"
 println("$pkgDir")
 println("$registryRepoUrl")
+println("$registryPrivateRepoUrl")
 println("$registryPublicRepoUrl")
 
 using Pkg
@@ -22,9 +24,9 @@ run(`git config --global user.name "zeal yen"`)
 if !isfile("Registry.toml")
     println("Registry.toml not found")
     
-    LocalRegistry.create_registry("MyJuliaRegistry", registryPublicRepoUrl; push = true)
+    LocalRegistry.create_registry("MyJuliaRegistry", registryPrivateRepoUrl; push = true)
     println("Registry.toml created")
 end
 
-LocalRegistry.register(pkgDir; registry = registryPublicRepoUrl, repo = registryRepoUrl)
+LocalRegistry.register(pkgDir; registry = registryPrivateRepoUrl, repo = registryPublicRepoUrl)
 println("Package registered")
