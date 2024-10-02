@@ -10,6 +10,7 @@
 - 很冷門、很難找到相關資源
 
 ## 依據 [CI/CD pipeline](https://github.com/sojoasd/My-Julia/blob/main/.github/workflows/action.yml) 三部分介紹
+- 可以從 CI/CD pipeline 了解 Julia 的運作方式
 
 ### Test Package (pkg-test job)
 - 測試 package 每個 function 是否正確
