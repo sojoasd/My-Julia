@@ -38,3 +38,13 @@
         - JIT compile: 0.9 秒、消耗 126 MB 記憶體
         - AOT compile: 0.04 秒、消耗 3 MB 記憶體
 
+## 三個 Package 簡單說明，並比較效能差異
+- [PlotsOperator](https://github.com/sojoasd/My-Julia/tree/main/PlotsOperator): 用來繪製[圖表](https://github.com/sojoasd/My-Julia/blob/main/PolarPlots.png)
+    - 效能差異大
+
+- [FindRoot](https://github.com/sojoasd/My-Julia/tree/main/FindRoot): 用來找出函數的根，繪製[圖表](https://github.com/sojoasd/My-Julia/blob/main/polynomial_plot.png)
+    - 效能差異不大
+
+- [MatrixOperator](https://github.com/sojoasd/My-Julia/tree/main/MatrixOperator): 用來進行矩陣運算
+    - 效能幾乎一樣
+
