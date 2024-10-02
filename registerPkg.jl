@@ -14,6 +14,10 @@ Pkg.instantiate()
 
 using LocalRegistry
 
+# Set Git user configuration
+run(`git config --global user.email "sojoasd@gmail.com"`)
+run(`git config --global user.name "zeal yen"`)
+
 # check Registry.toml exists
 if !isfile("Registry.toml")
     println("Registry.toml not found")
