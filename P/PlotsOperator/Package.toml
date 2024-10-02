@@ -1,0 +1,4 @@
+name = "PlotsOperator"
+uuid = "202d5a5a-2215-47a5-8658-c5af7f6888cd"
+repo = "https://github.com/sojoasd/My-Julia.git"
+subdir = "PlotsOperator"
