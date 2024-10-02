@@ -7,16 +7,47 @@ on:
       - 'release/**'  
 
 jobs:
-  pkg-test:
+  init:
     runs-on: ubuntu-latest
+    outputs:
+      package_name: ${{ steps.extract.outputs.package_name }}
+      package_version: ${{ steps.extract.outputs.package_version }}
 
     steps:
+      - name: Extract tag components
+        id: extract
+        run: |
+          TAG_NAME="${GITHUB_REF#refs/tags/release/}"
+          PACKAGE_NAME=$(echo $TAG_NAME | cut -d'/' -f1)
+          PACKAGE_VERSION=$(echo $TAG_NAME | cut -d'/' -f2)
+          
+          echo "Package Name: $PACKAGE_NAME"
+          echo "Package Version: $PACKAGE_VERSION"
+          
+          # 设置输出，供其他 jobs 使用
+          echo "::set-output name=package_name::$PACKAGE_NAME"
+          echo "::set-output name=package_version::$PACKAGE_VERSION"
+          
+  pkg-test:
+    needs: init 
+    runs-on: ubuntu-latest
+    env:
+      PACKAGE_NAME: ${{ needs.init.outputs.package_name }}
+      PACKAGE_VERSION: ${{ needs.init.outputs.package_version }}
+    steps:
       - uses: actions/checkout@v4
-
-      - name: Run a one-line script
-        run: echo "Build triggered by release tag!"
-
       - name: Run a multi-line script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo echo "Running tests for $PACKAGE_NAME version $PACKAGE_VERSION"
+
+  pkg-registry:
+    needs: [init, pkg-test]
+    runs-on: ubuntu-latest
+    env:
+      PACKAGE_NAME: ${{ needs.init.outputs.package_name }}
+      PACKAGE_VERSION: ${{ needs.init.outputs.package_version }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a multi-line script
+        run: |
+          echo echo "Running tests for $PACKAGE_NAME version $PACKAGE_VERSION"
