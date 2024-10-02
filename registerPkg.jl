@@ -18,11 +18,11 @@ using LocalRegistry
 if !isfile("Registry.toml")
     println("Registry.toml not found")
     
-    LocalRegistry.create_registry("MyJuliaRegistry", registryRepoUrl; push = true)
+    LocalRegistry.create_registry("MyJuliaRegistry", registryPublicRepoUrl; push = true)
     println("Registry.toml created")
 end
 
-LocalRegistry.register(pkgDir; registry = registryRepoUrl, repo = registryRepoUrl)
+LocalRegistry.register(pkgDir; registry = registryPublicRepoUrl, repo = registryPublicRepoUrl)
 println("Package registered")
 
 

@@ -56,9 +56,9 @@ jobs:
           git config --local user.name "zeal yen"
           git add .
           git commit -m "Update version to $PACKAGE_VERSION" || echo "No changes to commit"
-          git push
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/sojoasd/My-Julia.git HEAD:main
       - name: Run pkg registry script
         run: |
           echo "Registering $PACKAGE_NAME version $PACKAGE_VERSION"
           echo "julia --project registerPkg.jl $PACKAGE_NAME"
-          julia --project registerPkg.jl $PACKAGE_NAME ${{ secrets.REPO_TOKEN }}
+          julia --project registerPkg.jl $PACKAGE_NAME
