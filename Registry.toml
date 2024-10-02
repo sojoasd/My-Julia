@@ -1,6 +1,0 @@
-name = "MyJuliaRegistry"
-uuid = "a6b6df19-4990-4408-9c9b-9accffa28b17"
-repo = "git@github.com:sojoasd/My-Julia.git"
-
-[packages]
-52655ab5-b29d-45fc-a133-0c293715c2a1 = { name = "FindRoot", path = "F/FindRoot" }
