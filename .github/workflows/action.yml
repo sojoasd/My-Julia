@@ -61,4 +61,4 @@ jobs:
         run: |
           echo "Registering $PACKAGE_NAME version $PACKAGE_VERSION"
           echo "julia --project registerPkg.jl $PACKAGE_NAME"
-          julia --project registerPkg.jl $PACKAGE_NAME
+          julia --project registerPkg.jl $PACKAGE_NAME ${{ secrets.REPO_TOKEN }}
