@@ -4,9 +4,9 @@ registryPrivateRepoUrl = "https://x-access-token:$repoToken@github.com/sojoasd/M
 registryPublicRepoUrl = "https://github.com/sojoasd/My-Julia.git"
 
 pkgDir = "$(@__DIR__)/$pkgName"
-println("$pkgDir")
-println("$registryPrivateRepoUrl")
-println("$registryPublicRepoUrl")
+println("pkgDir: $pkgDir")
+println("registryPrivateRepoUrl: $registryPrivateRepoUrl")
+println("registryPublicRepoUrl: $registryPublicRepoUrl")
 
 using Pkg
 

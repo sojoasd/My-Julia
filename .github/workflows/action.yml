@@ -52,7 +52,7 @@ jobs:
           cat ./$PACKAGE_NAME/Project.toml
       - name: Commit and push changes
         run: |
-          git config --local user.email "zealyen@noodoe.com"
+          git config --local user.email "sojoasd@gmail.com"
           git config --local user.name "zeal yen"
           git add .
           git commit -m "Update version to $PACKAGE_VERSION" || echo "No changes to commit"
