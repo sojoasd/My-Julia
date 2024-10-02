@@ -1,6 +1,7 @@
 # Julia Technical Sharing 
 
 ## Julia 特色
+- 弱型別、強型別混用
 - 設計目的是為了提供接近 C 語言的性能
 - 支援 JIT, AOT 兩種編譯方式，彼此效能差異很大
     - AOT 編譯就是 Julia 效能好的原因
@@ -8,7 +9,7 @@
 - 很適合處理數值運算、圖表繪製、機器學習等
 - 很冷門、很難找到相關資源
 
-## 依據 CI/CD pipeline 三部分介紹
+## 依據 [CI/CD pipeline](https://github.com/sojoasd/My-Julia/blob/main/.github/workflows/action.yml) 三部分介紹
 
 ### Test Package (pkg-test job)
 - 測試 package 每個 function 是否正確
@@ -20,8 +21,8 @@
 - 呼叫 ```registerPkg.jl``` 進行 package 的註冊
 - 註冊完成會出現
     - Registry.toml: 註冊資訊
-    - [Index]/[PkgName] 路徑: package 資訊
-- 任何地方都可以加入 Registry (Repo url)，進行 add pkg，```Repo url```必須是夾帶 token 的 https url，如 ```generateDylib.jl``` 的 ```registryPrivateRepoUrl```
+    - {Index}/{PkgName} 路徑: package 資訊
+- 任何地方都可以加入 Registry (Repo url)，進行 add pkg，```Repo url```必須是夾帶 token 的 https url，如 generateDylib.jl 的 ```registryPrivateRepoUrl```
 
 ### Generate dylib file (dylib-generate job)
 - dylib file 就是 AOT 編譯後的檔案
