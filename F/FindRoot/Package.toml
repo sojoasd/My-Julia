@@ -1,0 +1,4 @@
+name = "FindRoot"
+uuid = "52655ab5-b29d-45fc-a133-0c293715c2a1"
+repo = "https://@github.com/sojoasd/My-Julia.git"
+subdir = "FindRoot"
