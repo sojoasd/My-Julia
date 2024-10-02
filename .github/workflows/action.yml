@@ -24,7 +24,7 @@ jobs:
       - name: Set up Julia 1.10
         uses: julia-actions/setup-julia@v2
         with:
-          version: 1.10
+          version: '1.10.0'
       - name: Run test script
         run: |
           echo "Running tests for $PACKAGE_NAME version $PACKAGE_VERSION"
