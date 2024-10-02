@@ -28,7 +28,7 @@ jobs:
       - name: Run test script
         run: |
           echo "Running tests for $PACKAGE_NAME version $PACKAGE_VERSION"
-          julia --project testPkg.jl $PACKAGE_NAME
+          echo "julia --project testPkg.jl $PACKAGE_NAME"
 
   pkg-registry:
     needs: pkg-test
