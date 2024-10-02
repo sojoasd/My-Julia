@@ -45,14 +45,15 @@ jobs:
           version: '1.10.0'
       - name: Modify Project.toml version
         run: |
-          cat Project.toml
+          echo "Registering $PACKAGE_NAME version $PACKAGE_VERSION"
+          cat ./$PACKAGE_NAME/Project.toml
           sed -i "s/^version = \".*\"/version = \"$PACKAGE_VERSION\"/" ./$PACKAGE_NAME/Project.toml
-          cat Project.toml
+          cat ./$PACKAGE_NAME/Project.toml
       - name: Commit and push changes
         run: |
           git config --local user.email "zealyen@noodoe.com"
           git config --local user.name "zeal yen"
-          git add Project.toml
+          git add .
           git commit -m "Update version to $PACKAGE_VERSION"
           git push
       - name: Run pkg registry script
