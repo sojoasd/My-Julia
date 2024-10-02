@@ -24,7 +24,7 @@ jobs:
       - name: Set up Julia 1.10
         uses: julia-actions/setup-julia@v2
         with:
-          version: '1.10.0'
+          version: '1.10.5'
       - name: Run test script
         run: |
           echo "Running tests for $PACKAGE_NAME version $PACKAGE_VERSION"
@@ -42,7 +42,7 @@ jobs:
       - name: Set up Julia 1.10
         uses: julia-actions/setup-julia@v2
         with:
-          version: '1.10.0'
+          version: '1.10.5'
       - name: Modify Project.toml version
         run: |
           echo "Registering $PACKAGE_NAME version $PACKAGE_VERSION"
@@ -62,3 +62,22 @@ jobs:
           echo "Registering $PACKAGE_NAME version $PACKAGE_VERSION"
           echo "julia --project registerPkg.jl $PACKAGE_NAME"
           julia --project registerPkg.jl $PACKAGE_NAME ${{ secrets.REPO_TOKEN }}
+
+  dylib-generate:
+    needs: pkg-registry
+    runs-on: ubuntu-latest
+    env:
+      PACKAGE_NAME: ${{ github.event.inputs.package_name }}
+      PACKAGE_VERSION: ${{ github.event.inputs.package_version }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Julia 1.10
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.10.5'
+      - name: Run dylib generate script
+        run: |
+          echo "Registering $PACKAGE_NAME version $PACKAGE_VERSION"
+          julia --project generateDylib.jl $PACKAGE_NAME $PACKAGE_VERSION ${{ secrets.REPO_TOKEN }}
+          ls
+          julia --project --sysimage $PACKAGE_NAME.dylib

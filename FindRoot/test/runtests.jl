@@ -8,4 +8,4 @@ polynomials = [
 ]
 
 # 呼叫 FindRoot 模組的函數
-FindRoot.findRootByPolynomials(polynomials, 0, 6)
+@time FindRoot.findRootByPolynomials(polynomials, 0, 6)
