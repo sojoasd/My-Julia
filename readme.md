@@ -5,7 +5,7 @@
 - 設計目的是為了提供接近 C 語言的性能
 - 支援 JIT, AOT 兩種編譯方式，彼此效能差異很大
     - AOT 編譯就是 Julia 效能好的原因
-    - JIT 編譯是一般高階語言的編譯方式
+    - JIT 編譯是一般高階語言的編譯模式
 - 很適合處理數值運算、圖表繪製、機器學習等
 - 很冷門、很難找到相關資源
 
@@ -29,7 +29,7 @@
 - dylib file 就是 AOT 編譯後的檔案
 - 呼叫 ```generateDylib.jl``` 進行 AOT 編譯
     - test 涵蓋率等於 AOT 編譯涵蓋率，```precompile_execution_file``` 參數為 runtests.jl 的路徑
-- job log 可以用關鍵字查詢三種效能結果
+- job log 可以用關鍵字查詢三種編譯模式的執行結果
     - ```test uncompiled```: 未進行編譯狀態下測試
     - ```test JIT compile```: 已 JIT 編譯狀態下測試
     - ```test AOT compile```: 已 AOT 編譯狀態下測試
