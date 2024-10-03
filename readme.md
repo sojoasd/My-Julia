@@ -12,21 +12,23 @@
 ## 依據 [CI/CD pipeline](https://github.com/sojoasd/My-Julia/blob/main/.github/workflows/action.yml) 三部分介紹
 - 可以從 CI/CD pipeline 了解 Julia 的運作方式
 
-### Test Package (pkg-test job)
+### 測試 Package (pkg-test job)
 - 測試 package 每個 function 是否正確
-- 預設進入為 ```/test/runtests.jl```
+- 列出未涵蓋的檔案與行數
+- ```generate_coverage(pkgName)```預設測試入口 ```/test/runtests.jl```
     - 這裡的沒有使用 @test macro
+- ```runtests.jl``` 檔案的意義不僅僅是測試，AOT 編譯會依據測試涵蓋部分進行編譯
 
-### Register Package (pkg-register job)
-- 因 julia 機器無法對外存取 github repo，所以 repo url 必須使用 https 且需要夾帶 token (secrets)
-- 呼叫 ```registerPkg.jl``` 進行 package 的註冊
-- 註冊完成會出現
+### 發布 Package (pkg-register job)
+- 因 github actions 的 julia 機器無權限存取 github repo，所以 repo url 必須使用 https 且需要夾帶 token (secrets)
+- 呼叫 ```registerPkg.jl``` 發布 package
+- 發布完成會出現
     - Registry.toml: 註冊資訊
     - {Index}/{PkgName} 路徑: package 資訊
-- 任何地方都可以加入 Registry (Repo url)，進行 add pkg，```Repo url```必須是夾帶 token 的 https url，如 generateDylib.jl 的 ```registryPrivateRepoUrl```
+- 任何地方都可以加入 Registry (Repo url)，進行 add pkg，但注意```Repo url```必須是夾帶 token 的 https url，如 generateDylib.jl 的 ```registryPrivateRepoUrl```
 
-### Generate dylib file (dylib-generate job)
-- dylib file 就是 AOT 編譯後的檔案
+### 產生 dylib 檔案 (dylib-generate job)
+- dylib file 就是 AOT 編譯後的檔
 - 呼叫 ```generateDylib.jl``` 進行 AOT 編譯
     - test 涵蓋率等於 AOT 編譯涵蓋率，```precompile_execution_file``` 參數為 runtests.jl 的路徑
 - job log 可以用關鍵字查詢三種編譯模式的執行結果

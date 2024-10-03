@@ -1,3 +1,4 @@
 [deps]
+LocalCoverage = "5f6e1e16-694c-5876-87ef-16b5274f298e"
 LocalRegistry = "89398ba2-070a-4b16-a995-9893c55d93cf"
 PackageCompiler = "9b87118b-4619-50d2-8e1e-99f35a4d4d9d"
