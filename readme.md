@@ -46,5 +46,5 @@
     - 效能差異不大
 
 - [MatrixOperator](https://github.com/sojoasd/My-Julia/tree/main/MatrixOperator): 用來進行矩陣運算
-    - 效能幾乎一樣
+    - 效能幾乎一樣(猜測是因為矩陣運算已經被優化過，就算 AOT 編譯也無法再進行優化)
 
