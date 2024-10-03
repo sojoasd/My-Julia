@@ -27,7 +27,7 @@
 
 ### Generate dylib file (dylib-generate job)
 - dylib file 就是 AOT 編譯後的檔案
-- 呼叫 ```testDylib.jl``` 進行 AOT 編譯
+- 呼叫 ```generateDylib.jl``` 進行 AOT 編譯
     - test 涵蓋率等於 AOT 編譯涵蓋率，```precompile_execution_file``` 參數為 runtests.jl 的路徑
 - job log 可以用關鍵字查詢三種效能結果
     - ```test uncompiled```: 未進行編譯狀態下測試
