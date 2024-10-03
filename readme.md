@@ -9,28 +9,31 @@
 - 很適合處理數值運算、圖表繪製、機器學習等
 - 很冷門、很難找到相關資源
 
-## 依據 [CI/CD pipeline](https://github.com/sojoasd/My-Julia/blob/main/.github/workflows/action.yml) 三部分介紹
-- 可以從 CI/CD pipeline 了解 Julia 的運作方式
+## 說明 Julia 的運作
+- 依據 [CI/CD pipeline](https://github.com/sojoasd/My-Julia/blob/main/.github/workflows/action.yml) 的測試 Package、發布 Package、產生 dylib 檔案三部分，說明 Julia 的運作
 
 ### 測試 Package (pkg-test job)
-- 測試 package 每個 function 是否正確
-- 列出未涵蓋的檔案與行數
-- ```generate_coverage(pkgName)```預設測試入口 ```/test/runtests.jl```
+- 目的: 測試 package 功能是否正常、顯示未涵蓋的部分
+- 呼叫```testPkgCoverage.jl```進行測試，列出未涵蓋的檔案與行數
+    - [範例連結](https://github.com/sojoasd/My-Julia/actions/runs/11159140906/job/31016931373)
+    - 未涵蓋資訊: ```File: src/PlotsOperator.jl, Uncovered lines: [3]```
+    - ```generate_coverage(pkgName)```預設測試入口```/test/runtests.jl```
     - 這裡的沒有使用 @test macro
 - ```runtests.jl``` 檔案的意義不僅僅是測試，AOT 編譯會依據測試涵蓋部分進行編譯
 
 ### 發布 Package (pkg-register job)
-- 因 github actions 的 julia 機器無權限存取 github repo，所以 repo url 必須使用 https 且需要夾帶 token (secrets)
+- 目的: 發布 Package 到 Registry (Repo)
 - 呼叫 ```registerPkg.jl``` 發布 package
+    - 因 github actions 的 julia 機器無權限存取 github repo，所以 repo url 必須使用 https 且需要夾帶 token (secrets)
 - 發布完成會出現
-    - Registry.toml: 註冊資訊
-    - {Index}/{PkgName} 路徑: package 資訊
-- 任何地方都可以加入 Registry (Repo url)，進行 add pkg，但注意```Repo url```必須是夾帶 token 的 https url，如 generateDylib.jl 的 ```registryPrivateRepoUrl```
+    - Registry.toml: 註冊資訊，所有 package 註冊清單
+    - [{Index}/{PkgName} 路徑](https://github.com/sojoasd/My-Julia/tree/main/P/PlotsOperator): package 詳細資訊，包含[版本清單](https://github.com/sojoasd/My-Julia/blob/main/P/PlotsOperator/Versions.toml)
+- 任何地方都可以加入 Registry (Repo url)，選擇版號進行 add pkg，但注意```Repo url```必須是夾帶 token 的 https url，如 generateDylib.jl 的 ```registryPrivateRepoUrl```
 
 ### 產生 dylib 檔案 (dylib-generate job)
-- dylib file 就是 AOT 編譯後的檔
+- 目的: 進行 AOT 編譯，產生 dylib 檔案
 - 呼叫 ```generateDylib.jl``` 進行 AOT 編譯
-    - test 涵蓋率等於 AOT 編譯涵蓋率，```precompile_execution_file``` 參數為 runtests.jl 的路徑
+    - ```precompile_execution_file``` 參數為 runtests.jl 的路徑，必須執行測試，測試涵蓋率會影響 AOT 編譯完整度
 - job log 可以用關鍵字查詢三種編譯模式的執行結果
     - ```test uncompiled```: 未進行編譯狀態下測試
     - ```test JIT compile```: 已 JIT 編譯狀態下測試
