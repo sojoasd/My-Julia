@@ -30,9 +30,9 @@
 - 呼叫 ```testDylib.jl``` 進行 AOT 編譯
     - test 涵蓋率等於 AOT 編譯涵蓋率，```precompile_execution_file``` 參數為 runtests.jl 的路徑
 - job log 可以用關鍵字查詢三種效能結果
-    - ```test uncompiled```: 未進行編譯
-    - ```test JIT compile```: JIT 編譯
-    - ```test AOT compile```: AOT 編譯
+    - ```test uncompiled```: 未進行編譯狀態下測試
+    - ```test JIT compile```: 已 JIT 編譯狀態下測試
+    - ```test AOT compile```: 已 AOT 編譯狀態下測試
     - [範例連結](https://github.com/sojoasd/My-Julia/tree/main/PlotsOperator): [job log](https://github.com/sojoasd/My-Julia/actions/runs/11147980242/job/30983732176)
         - uncompiled: 6.5 秒、消耗 138 MB 記憶體
         - JIT compile: 0.9 秒、消耗 126 MB 記憶體
